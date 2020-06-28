@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="history">Previous Photos</string>
+    <string name="facebook_app_id">646261675959645</string>
+    <string name="fb_login_protocol_scheme">fb646261675959645</string>
+    <string name="savedMessage">Photo Save succeeded</string>
+
+</resources>

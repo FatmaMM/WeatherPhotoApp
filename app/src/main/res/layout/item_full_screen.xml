@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="currentitem"
+            type="com.example.weatherapp.data.model.SavedImageObject" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black">
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.03" />
+
+        <ImageView
+            android:id="@+id/full_image"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_420sdp"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:background="@android:color/black"
+            android:fitsSystemWindows="true"
+            android:scaleType="fitXY"
+            app:imagePath="@{currentitem.imagepath}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/close"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45" />
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:scaleType="centerCrop"
+            app:image="@{currentitem.icon}"
+            app:layout_constraintBottom_toBottomOf="@id/full_image"
+            app:layout_constraintEnd_toEndOf="@id/full_image"
+            app:layout_constraintHorizontal_bias="0.03"
+            app:layout_constraintStart_toStartOf="@id/full_image"
+            app:layout_constraintTop_toBottomOf="@id/place"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{currentitem.desc}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintBottom_toBottomOf="@id/icon"
+            app:layout_constraintStart_toEndOf="@id/icon"
+            app:layout_constraintTop_toTopOf="@id/icon" />
+
+        <ImageView
+            android:id="@+id/temp_ic"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/ic_temperature"
+            app:layout_constraintBottom_toBottomOf="@id/full_image"
+            app:layout_constraintEnd_toEndOf="@id/full_image"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="@id/full_image"
+            app:layout_constraintTop_toBottomOf="@id/place"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{currentitem.temp}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="@id/temp_ic"
+            app:layout_constraintStart_toEndOf="@id/temp_ic"
+            app:layout_constraintTop_toTopOf="@id/temp_ic"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <ImageView
+            android:id="@+id/place"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:src="@drawable/ic_location"
+            app:layout_constraintBottom_toBottomOf="@id/full_image"
+            app:layout_constraintEnd_toEndOf="@id/full_image"
+            app:layout_constraintHorizontal_bias="0.03"
+            app:layout_constraintStart_toStartOf="@id/full_image"
+            app:layout_constraintTop_toTopOf="@id/full_image"
+            app:layout_constraintVertical_bias="0.07" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{currentitem.address}"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@id/place"
+            app:layout_constraintStart_toEndOf="@id/place"
+            app:layout_constraintTop_toTopOf="@id/place" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

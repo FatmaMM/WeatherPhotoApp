@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="imageUrl"
             type="String" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_4sdp">
 
         <ImageView
-            android:id="@+id/comics_im"
+            android:id="@+id/prev_im"
             android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_120sdp"
+            android:layout_height="@dimen/_130sdp"
             android:scaleType="fitXY"
-            app:imagePath="@{imageUrl}"
+            android:src="@drawable/ic_temperature"
+            app:image="@{imageUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

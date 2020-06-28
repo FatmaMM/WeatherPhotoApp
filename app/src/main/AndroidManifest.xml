@@ -30,20 +30,11 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider> <!-- <provider -->
-        <!-- android:name="com.facebook.FacebookContentProvider" -->
-        <!-- android:authorities="com.facebook.app.FacebookContentProvidercom.example.weatherapp" -->
-        <!-- android:exported="true" /> -->
-        <!-- <meta-data -->
-        <!-- android:name="com.facebook.sdk.ApplicationId" -->
-        <!-- android:value="@string/facebook_app_id" /> -->
-        <!-- //to use login or share add this -->
-        <!-- <activity -->
-        <!-- android:name="com.facebook.FacebookActivity" -->
-        <!-- android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" -->
-        <!-- android:label="@string/app_name" -->
-        <!-- android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity> -->
-        <!-- android:screenOrientation="portrait" -->
+        </provider>
+
+        <activity
+            android:name=".ui.fullimages.FullscreenActivity"
+            android:theme="@style/FullScreenTheme" />
         <activity
             android:name=".ui.base.MainActivity"
             android:theme="@style/FullScreenTheme">

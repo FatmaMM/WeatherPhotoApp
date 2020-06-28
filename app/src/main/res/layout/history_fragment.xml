@@ -7,6 +7,14 @@
         <variable
             name="viewModel"
             type="com.example.weatherapp.ui.history.HistoryViewModel" />
+
+        <variable
+            name="currentitem"
+            type="com.example.weatherapp.data.model.SavedImageObject" />
+
+        <variable
+            name="imageUrl"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
@@ -38,7 +46,7 @@
             app:layout_constraintStart_toEndOf="@+id/back"
             app:layout_constraintTop_toTopOf="@+id/back" />
 
-        <View
+        <FrameLayout
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -52,20 +60,20 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_orders"
+                android:id="@+id/rv_images"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:spanCount="2"
                 tools:listitem="@layout/item_image" />
-        </View>
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

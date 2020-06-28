@@ -34,7 +34,7 @@
             android:background="@android:color/black"
             android:fitsSystemWindows="true"
             android:scaleType="fitXY"
-            app:imagePath="@{currentitem.imagepath}"
+            app:image="@{currentitem.imagepath}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

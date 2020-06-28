@@ -13,8 +13,12 @@ class BindingUtils {
         @JvmStatic
         fun bindImage(view: ImageView, image: String?) {
             if (image != null) {
-                Glide.with(view.context).load(ApiEndPoint.iconURl + "/" + image + "@2x.png")
-                    .into(view)
+                if (!image.startsWith("file"))
+                    Glide.with(view.context).load(ApiEndPoint.iconURl + "/" + image + "@2x.png")
+                        .into(view)
+                else
+                    Glide.with(view.context).load(image)
+                        .into(view)
             }
         }
     }

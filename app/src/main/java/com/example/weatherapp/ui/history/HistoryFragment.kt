@@ -1,16 +1,16 @@
 package com.example.weatherapp.ui.history
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.example.weatherapp.BR
 
 import com.example.weatherapp.R
+import com.example.weatherapp.data.model.SavedImageObject
 import com.example.weatherapp.databinding.HistoryFragmentBinding
 import com.example.weatherapp.ui.base.BaseFragment
 import com.example.weatherapp.ui.base.MainActivity
+import com.example.weatherapp.ui.history.adapter.ItemAdapter
+import com.example.weatherapp.ui.history.adapter.OnCharacterListsItemClicked
 import kotlinx.android.synthetic.main.history_fragment.*
 
 class HistoryFragment : BaseFragment<HistoryFragmentBinding, HistoryViewModel>() {
@@ -30,6 +30,20 @@ class HistoryFragment : BaseFragment<HistoryFragmentBinding, HistoryViewModel>()
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         back.setOnClickListener { (activity!! as MainActivity).onBackPressed() }
+
+        //update ui with images list
+        mViewModel.images.observe(viewLifecycleOwner, Observer {
+            var adapter = ItemAdapter(it)
+            rv_images.adapter = adapter
+            adapter.onItemClick = object : OnCharacterListsItemClicked {
+                override fun onItemClick(item: SavedImageObject, pos: Int) {
+//                    openImagesActivity(items, pos)
+
+                }
+
+
+            }
+        })
     }
 
 }

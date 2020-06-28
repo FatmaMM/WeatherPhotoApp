@@ -296,7 +296,7 @@ class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), Locatio
                     context!!.contentResolver.openInputStream(Uri.fromFile(File(sendUri.path!!)))!!
                 getBitmap = BitmapFactory.decodeStream(image_stream)
             } catch (e: FileNotFoundException) {
-                e.printStackTrace();
+                e.printStackTrace()
             }
         } catch (e: Exception) {
             e.printStackTrace()

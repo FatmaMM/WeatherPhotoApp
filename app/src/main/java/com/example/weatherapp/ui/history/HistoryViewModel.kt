@@ -16,11 +16,14 @@ class HistoryViewModel constructor(
     dataBase: SavedImagesDataBase,
     conrext: Context
 ) : BaseViewModel<ApiHelper>(api, dataBase, conrext) {
-    fun getOrders() {
-        var error = MutableLiveData<String>()
-        var deleteRes = MutableLiveData<String>()
-        var images = MutableLiveData<ArrayList<SavedImageObject>>()
+    init {
+        getImages()
+    }
+    var error = MutableLiveData<String>()
+    var deleteRes = MutableLiveData<String>()
+    var images = MutableLiveData<ArrayList<SavedImageObject>>()
 
+    fun getImages() {
         dataBase.daoAccess().fetchSavedImages()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

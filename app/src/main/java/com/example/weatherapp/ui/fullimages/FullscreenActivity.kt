@@ -28,11 +28,6 @@ class FullscreenActivity : BaseActivity<ItemFullScreenBinding,FullScreenViewMode
         //set viewDataBinding variables
         viewDataBinding!!.currentitem = item
 
-
-        /**
-         * get current scrolled image position from images list and display in counter textview
-         */
-
         close.setOnClickListener { finish() }
     }
 

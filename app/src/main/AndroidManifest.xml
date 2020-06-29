@@ -36,7 +36,7 @@
             android:name=".ui.fullimages.FullscreenActivity"
             android:theme="@style/FullScreenTheme" />
         <activity
-            android:name=".ui.base.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

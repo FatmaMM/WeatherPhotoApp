@@ -20,7 +20,6 @@ class HistoryViewModel constructor(
         getImages()
     }
     var error = MutableLiveData<String>()
-    var deleteRes = MutableLiveData<String>()
     var images = MutableLiveData<ArrayList<SavedImageObject>>()
 
     fun getImages() {

@@ -1,11 +1,10 @@
-package com.example.weatherapp.ui.base
+package com.example.weatherapp.ui.main
 import android.os.Bundle
-import com.example.weatherapp.ui.main.MyPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.fragment.app.Fragment
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.ui.main.MainViewModel
+import com.example.weatherapp.ui.base.BaseActivity
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector

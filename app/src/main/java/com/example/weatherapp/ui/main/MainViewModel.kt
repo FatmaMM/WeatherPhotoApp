@@ -41,7 +41,6 @@ class MainViewModel constructor(
             val obj = addresses[0]
             var add = obj.getAddressLine(0)
             locationName.value = add
-            Log.v("IGA", "Address$add")
         } catch (e: IOException) {
 
             Log.v("IGA", e.message!!)

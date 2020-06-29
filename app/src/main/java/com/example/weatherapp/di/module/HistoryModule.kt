@@ -1,11 +1,21 @@
 package com.example.weatherapp.di.module
 
-import com.example.weatherapp.ui.history.HistoryFragment
+import android.content.Context
+import com.example.weatherapp.data.local.database.SavedImagesDataBase
+import com.example.weatherapp.domain.repository.ApiHelper
+import com.example.weatherapp.ui.history.HistoryViewModel
+import com.example.weatherapp.ui.main.MainViewModel
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import dagger.Provides
 
 @Module
-abstract class HistoryModule {
-    @ContributesAndroidInjector(modules = [HistoryProvider::class])
-    abstract fun provideProfitFragment(): HistoryFragment
+class HistoryModule {
+    @Provides
+    fun provideMainViewModel(
+        api: ApiHelper,
+        dataBase: SavedImagesDataBase,
+        context: Context
+    ): HistoryViewModel {
+        return HistoryViewModel(api, dataBase, context)
+    }
 }

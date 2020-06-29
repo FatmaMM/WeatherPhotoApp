@@ -1,15 +1,16 @@
 package com.example.weatherapp.di.module
 
+import android.content.Context
+import com.example.weatherapp.data.local.database.SavedImagesDataBase
 import com.example.weatherapp.domain.repository.ApiHelper
-import com.example.weatherapp.ui.history.HistoryFragment
-import com.example.weatherapp.ui.main.MainFragment
 import com.example.weatherapp.ui.main.MainViewModel
 import dagger.Module
 import dagger.Provides
-import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class MainModule {
-    @ContributesAndroidInjector(modules = [MainProvider::class])
-    abstract fun provideProfitFragment(): MainFragment
+class MainModule {
+    @Provides
+    fun provideMainViewModel(api: ApiHelper, database: SavedImagesDataBase, context: Context): MainViewModel {
+        return MainViewModel(api,database,context)
+    }
 }

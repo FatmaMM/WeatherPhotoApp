@@ -78,7 +78,7 @@ class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), Locatio
 
         if (allPermissionsGranted()) {
             startCamera()
-            getlocation()
+            getLocation()
         } else {
             requestPermissions(
                 REQUIRED_PERMISSIONS, MY_PERMISSIONS_REQUEST_CAMERA
@@ -134,7 +134,7 @@ class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), Locatio
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA) {
             if (allPermissionsGranted()) {
                 startCamera()
-                getlocation()
+                getLocation()
             } else {
                 Toast.makeText(
                     context!!,
@@ -230,7 +230,7 @@ class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), Locatio
 
     }
 
-    private fun getlocation() {
+    private fun getLocation() {
         try {
             locationManager =
                 context!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager

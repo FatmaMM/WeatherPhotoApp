@@ -1,4 +1,4 @@
-package com.example.weatherapp.ui.fullimages.adapter
+package com.example.weatherapp.ui.fullScreenimage.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

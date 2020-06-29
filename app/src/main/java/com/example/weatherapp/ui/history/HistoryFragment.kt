@@ -10,7 +10,7 @@ import com.example.weatherapp.data.model.SavedImageObject
 import com.example.weatherapp.databinding.HistoryFragmentBinding
 import com.example.weatherapp.ui.base.BaseFragment
 import com.example.weatherapp.ui.main.MainActivity
-import com.example.weatherapp.ui.fullimages.FullscreenActivity
+import com.example.weatherapp.ui.fullScreenimage.FullscreenActivity
 import com.example.weatherapp.ui.history.adapter.ItemAdapter
 import com.example.weatherapp.ui.history.adapter.OnCharacterListsItemClicked
 import kotlinx.android.synthetic.main.history_fragment.*
@@ -40,10 +40,7 @@ class HistoryFragment : BaseFragment<HistoryFragmentBinding, HistoryViewModel>()
             adapter.onItemClick = object : OnCharacterListsItemClicked {
                 override fun onItemClick(item: SavedImageObject, pos: Int) {
                     openImagesActivity(item, pos)
-
                 }
-
-
             }
         })
     }

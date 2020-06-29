@@ -1,9 +1,12 @@
 package com.example.weatherapp.ui.main
 
 import android.Manifest
+import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -11,9 +14,12 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.net.Uri
+import android.os.StrictMode
 import androidx.core.content.ContextCompat
 import android.util.Log
+import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.camera.core.*
 import com.example.weatherapp.R
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -32,6 +38,7 @@ import java.io.FileNotFoundException
 import java.io.InputStream
 import androidx.lifecycle.Observer
 import com.example.weatherapp.data.model.SavedImageObject
+import kotlinx.android.synthetic.main.share_image_dialog.*
 
 class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), LocationListener {
     private lateinit var photoFile: File
@@ -40,7 +47,7 @@ class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), Locatio
     private var camera: Camera? = null
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
-    lateinit var savedUri: Uri
+    private var savedUri: Uri? = null
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private var isGPSEnable = false
     private var isNetworkEnable = false
@@ -53,7 +60,7 @@ class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), Locatio
     companion object {
         fun newInstance() = MainFragment()
         private const val MY_PERMISSIONS_REQUEST_CAMERA = 12
-        private const val TAG = "CameraXBasic"
+        public const val TAG = "CameraXBasic"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private val REQUIRED_PERMISSIONS = arrayOf(
             Manifest.permission.CAMERA,
@@ -72,8 +79,11 @@ class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), Locatio
         return R.layout.main_fragment
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        viewDataBinding!!.imageSaved = imageSaved
+
         cameraProviderFuture = ProcessCameraProvider.getInstance(context!!)
 
         if (allPermissionsGranted()) {
@@ -87,11 +97,26 @@ class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), Locatio
 
         capture.setOnClickListener { takePhoto() }
         share.setOnClickListener {
-            shareImage()
+            if (null == savedUri) {
+                Toast.makeText(
+                    context!!,
+                    getString(R.string.cap_image_first),
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                var dialog = Dialog(context!!)
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialog.setContentView(R.layout.share_image_dialog)
+                dialog.facebook.setOnClickListener {
+                    shareImage(getString(R.string.facebook))
+                }
+                dialog.twitter.setOnClickListener {
+                    shareImage(getString(R.string.twitter))
+                }
+                dialog.show()
+            }
         }
-        save.setOnClickListener {
-            mViewModel.save(imageSaved)
-        }
+
         history.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction()
                 .replace(R.id.container, HistoryFragment.newInstance())
@@ -147,6 +172,7 @@ class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), Locatio
 
     }
 
+
     override fun onLocationChanged(p0: Location?) {
         this.location = p0
         if (location != null) {
@@ -165,9 +191,33 @@ class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), Locatio
     override fun onProviderDisabled(p0: String?) {
     }
 
-    private fun shareImage() {
+    private fun shareImage(app: String) {
+        var shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        shareIntent.type = "image/*"
+        if (app == getString(R.string.facebook) && isAppInstalled("com.facebook.katana")) {
+            shareIntent.setPackage("com.facebook.katana")
+        }
+        if (app == getString(R.string.twitter) && isAppInstalled("com.twitter.android")) {
+            shareIntent.setPackage("com.twitter.android")
+        }
+        shareIntent.putExtra(Intent.EXTRA_STREAM, savedUri)
+        try {
+            activity!!.startActivity(shareIntent)
+        } catch (ex: ActivityNotFoundException) {
+            Toast.makeText(context!!, getString(R.string.notFoundApp), Toast.LENGTH_LONG).show()
+            Log.e(TAG, "ActivityNotFoundException: ", ex)
+        }
     }
 
+    private fun isAppInstalled(app: String): Boolean {
+        return try {
+            context!!.packageManager.getApplicationInfo(app, 0)
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
+    }
 
     private fun startCamera() {
         try {
@@ -319,7 +369,7 @@ class MainFragment : BaseFragment<MainFragmentBinding, MainViewModel>(), Locatio
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    imageView.setImageBitmap(decodeUriToBitmap(savedUri))
+                    imageView.setImageBitmap(decodeUriToBitmap(savedUri!!))
                 }
             })
     }

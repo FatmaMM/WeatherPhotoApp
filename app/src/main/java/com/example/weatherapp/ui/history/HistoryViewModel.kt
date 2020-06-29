@@ -14,15 +14,15 @@ import io.reactivex.schedulers.Schedulers
 class HistoryViewModel constructor(
     api: ApiHelper,
     dataBase: SavedImagesDataBase,
-    conrext: Context
-) : BaseViewModel<ApiHelper>(api, dataBase, conrext) {
+    context: Context
+) : BaseViewModel<ApiHelper>(api, dataBase, context) {
     init {
         getImages()
     }
     var error = MutableLiveData<String>()
     var images = MutableLiveData<ArrayList<SavedImageObject>>()
 
-    fun getImages() {
+    private fun getImages() {
         dataBase.daoAccess().fetchSavedImages()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

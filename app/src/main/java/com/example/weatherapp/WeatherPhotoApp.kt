@@ -2,6 +2,7 @@ package com.example.weatherapp
 
 import android.app.Activity
 import android.app.Application
+import android.os.StrictMode
 import androidx.multidex.MultiDexApplication
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.interceptors.HttpLoggingInterceptor
@@ -20,6 +21,8 @@ class WeatherPhotoApp : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+        var builder = StrictMode.VmPolicy.Builder() as StrictMode.VmPolicy.Builder
+        StrictMode.setVmPolicy(builder.build())
         DaggerAppComponent.builder().application(this).build().inject(this)
         AndroidNetworking.initialize(this)
         val debug = true

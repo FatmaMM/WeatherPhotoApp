@@ -4,7 +4,7 @@ import com.example.weatherapp.di.module.HistoryProvider
 import com.example.weatherapp.ui.main.MainActivity
 import com.example.weatherapp.di.module.MainProvider
 import com.example.weatherapp.di.module.MainModule
-import com.example.weatherapp.ui.fullimages.FullscreenActivity
+import com.example.weatherapp.ui.fullScreenimage.FullscreenActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

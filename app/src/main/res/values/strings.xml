@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">WeatherApp</string>
     <string name="history">Previous Photos</string>
-    <string name="facebook_app_id">646261675959645</string>
-    <string name="fb_login_protocol_scheme">fb646261675959645</string>
+    <string name="facebook">FaceBook</string>
+    <string name="twitter">Twitter</string>
     <string name="savedMessage">Photo Save succeeded</string>
+    <string name="notFoundApp">The selected app not found on your device</string>
+    <string name="select_app_to_share_image">Select app to share image with</string>
+    <string name="cap_image_first">Capture an image at first</string>
 
 </resources>
